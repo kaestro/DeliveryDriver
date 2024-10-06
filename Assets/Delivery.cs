@@ -5,6 +5,7 @@ using UnityEngine;
 public class Delivery : MonoBehaviour
 {
     private bool isDelivering = false;
+    private float destroyDelay = 0.5f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,10 +30,10 @@ public class Delivery : MonoBehaviour
 
     private void HandlePackagePickup(Collider2D collision)
     {
-        if (collision.CompareTag("Package"))
+        if (!isDelivering && collision.CompareTag("Package"))
         {
             Debug.Log("Package picked up!");
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject, destroyDelay);
             isDelivering = true;
         }
     }

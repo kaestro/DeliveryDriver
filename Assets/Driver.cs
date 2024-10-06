@@ -9,7 +9,7 @@ public class Driver : MonoBehaviour
     [SerializeField] float deltaSteer = 0.5f;
     [SerializeField] float moveSpeed = 0f;
     [SerializeField] float deltaMove = 0.1f;
-    [SerializeField] float deceleration = 0.95f;
+    [SerializeField] float deceleration = 0.99f;
 
     void Start()
     {

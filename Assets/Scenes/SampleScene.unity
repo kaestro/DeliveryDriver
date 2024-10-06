@@ -1412,7 +1412,7 @@ MonoBehaviour:
   deltaSteer: 0.5
   moveSpeed: 0
   deltaMove: 0.1
-  deceleration: 0.95
+  deceleration: 0.99
 --- !u!212 &1177030518
 SpriteRenderer:
   m_ObjectHideFlags: 0
