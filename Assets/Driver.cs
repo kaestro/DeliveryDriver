@@ -1,25 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    [SerializeField] float steerSpeed = 0f;
-    [SerializeField] float deltaSteer = 0.5f;
-    [SerializeField] float moveSpeed = 0f;
-    [SerializeField] float deltaMove = 0.1f;
-    [SerializeField] float deceleration = 0.99f;
+    [SerializeField] private float steerSpeed = 0f;
+    [SerializeField] private float deltaSteer = 0.5f;
+    [SerializeField] private float moveSpeed = 0f;
+    [SerializeField] private float deltaMove = 0.1f;
+    [SerializeField] private float deceleration = 0.99f;
+    [SerializeField] private float boostSpeed = 0.2f;
+    [SerializeField] private float bumpDegradation = 0.5f;
 
-    void Start()
-    {
-    }
-
-    void Update()
+    private void Update()
     {
         HandleSteering();
         HandleMovementSpeed();
         GraduallyReduceSpeed();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boost"))
+        {
+            moveSpeed += boostSpeed;
+        }
     }
 
     private void GraduallyReduceSpeed()
@@ -40,5 +47,10 @@ public class Driver : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         steerSpeed -= horizontalInput * deltaSteer * Time.deltaTime;
         transform.Rotate(0, 0, steerSpeed);
+    }
+
+    public void hitBump()
+    {
+        moveSpeed *= bumpDegradation;
     }
 }

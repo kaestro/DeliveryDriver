@@ -61,6 +61,7 @@
     <Compile Include="Assets\FollowCamera.cs" />
     <Compile Include="Assets\Driver.cs" />
     <Compile Include="Assets\Delivery.cs" />
+    <Compile Include="Assets\Bump.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
