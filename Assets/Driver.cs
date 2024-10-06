@@ -22,14 +22,14 @@ public class Driver : MonoBehaviour
     private void HandleMovementSpeed()
     {
         float verticalInput = Input.GetAxis("Vertical");
-        moveSpeed += verticalInput * deltaMove;
+        moveSpeed += verticalInput * deltaMove * Time.deltaTime;
         transform.Translate(0, moveSpeed, 0);
     }
 
     private void HandleSteering()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        steerSpeed += horizontalInput * deltaSteer;
+        steerSpeed += horizontalInput * deltaSteer * Time.deltaTime;
         transform.Rotate(0, 0, steerSpeed);
     }
 }
