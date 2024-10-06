@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     [SerializeField] float steerSpeed = 0f;
-    [SerializeField] float deltaSteer = 0.0001f;
-    [SerializeField] float moveSpeed = 0.001f;
-    [SerializeField] float deltaMove = 0.0001f;
+    [SerializeField] float deltaSteer = 0.5f;
+    [SerializeField] float moveSpeed = 0f;
+    [SerializeField] float deltaMove = 0.1f;
+    [SerializeField] float deceleration = 0.95f;
 
     void Start()
     {
@@ -17,6 +19,13 @@ public class Driver : MonoBehaviour
     {
         HandleSteering();
         HandleMovementSpeed();
+        GraduallyReduceSpeed();
+    }
+
+    private void GraduallyReduceSpeed()
+    {
+        moveSpeed *= deceleration;
+        steerSpeed *= deceleration;
     }
 
     private void HandleMovementSpeed()
