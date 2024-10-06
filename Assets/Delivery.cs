@@ -5,7 +5,17 @@ using UnityEngine;
 public class Delivery : MonoBehaviour
 {
     private bool isDelivering = false;
-    private float destroyDelay = 0.5f;
+    [SerializeField] private float destroyDelay = 0.5f;
+    [SerializeField] private Color32 hasPackageColor = new Color32(255, 128, 128, 255);
+    [SerializeField] private Color32 noPackageColor = new Color32(255, 255, 255, 255);
+
+    SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = noPackageColor;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,6 +34,7 @@ public class Delivery : MonoBehaviour
         if (isDelivering && collision.gameObject.CompareTag("Customer"))
         {
             isDelivering = false;
+            spriteRenderer.color = noPackageColor;
             Debug.Log("Package delivered!");
         }
     }
@@ -35,6 +46,7 @@ public class Delivery : MonoBehaviour
             Debug.Log("Package picked up!");
             Destroy(collision.gameObject, destroyDelay);
             isDelivering = true;
+            spriteRenderer.color = hasPackageColor;
         }
     }
 }
